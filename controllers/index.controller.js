@@ -1,9 +1,16 @@
 const controller = {}
 const path = require('path')
-const tittle = 'INDEX CON PUG TEST'
+
+let navItemSelected
 
 controller.index = (req,res)=>{
-    res.render('index')
+    navItemSelected = 'log_in'
+    res.render('log_in',{navItemSelected})
+}
+
+controller.sign_in = (req,res)=>{
+    navItemSelected = 'sign_in'
+    res.render('sign_in',{navItemSelected})
 }
 
 module.exports = controller

@@ -1,6 +1,9 @@
 html{
     height: 100%;
 }
+a{
+    text-decoration: none;
+}
 .bodyContainer{
     display: grid;
     margin: 0;
@@ -25,13 +28,15 @@ html{
     width: 8vw;
     background-color: #FFFFFF;
 }
+
+/*NavItem*/
 .navItem{
     display: grid;
     grid-template-rows: 0.6fr 1fr 0.6fr;
 }
 .up{
     background-color: #7CB4B3;
-    border-radius: 0px 0px 60px 0px;
+    border-radius: 0px 0px 0px 0px;
 }
 .backColor{
     background-color: #7CB4B3;
@@ -42,11 +47,43 @@ html{
     place-content: center;
     text-align: center;
     font-size: 1.3vw;
-    border-radius: 60px 0px 0px 60px;
-    background-color: #FFFFFF;
+    font-weight: 750;
+    font-family: "Inter";
+    border-radius: 0px 0px 0px 0px;
+    background-color: #7CB4B3;
+    color: #FFFFFF;
 }
 .down{
     background-color: #7CB4B3;
-    border-radius: 0px 60px 0px 0px;
+    border-radius: 0px 0px 0px 0px;
 }
 
+/*NavItemSelected*/
+.navItemSelected{
+    display: grid;
+    grid-template-rows: 0.6fr 1fr 0.6fr;
+}
+.navItemSelected .up{
+    background-color: #7CB4B3;
+    border-radius: 0px 0px 60px 0px;
+}
+
+.navItemSelected .backColor{
+    background-color: #7CB4B3;
+    display: grid;
+}
+
+.navItemSelected .navText{
+    display: grid;
+    place-content: center;
+    text-align: center;
+    font-size: 1.3vw;
+    border-radius: 60px 0px 0px 60px;
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+.navItemSelected .down{
+    background-color: #7CB4B3;
+    border-radius: 0px 60px 0px 0px;
+}
