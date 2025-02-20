@@ -1,5 +1,6 @@
 html{
     height: 100%;
+    font-family: "Inter";
 }
 a{
     text-decoration: none;
@@ -10,16 +11,13 @@ a{
     height: 100%;
     grid-template-columns: 0.37fr 1fr;
 }
+
+/*LEFT*/
 .left{
     background-color: #7CB4B3;
     display: flex;
     justify-content: right;
     align-items: flex-start;
-}
-.right{
-    background-color: #FFFFFF;
-    display: grid;
-    place-content: center;
 }
 .navContainer{
     display: grid;
@@ -47,8 +45,7 @@ a{
     place-content: center;
     text-align: center;
     font-size: 1.3vw;
-    font-weight: 750;
-    font-family: "Inter";
+    font-weight: 720;
     border-radius: 0px 0px 0px 0px;
     background-color: #7CB4B3;
     color: #FFFFFF;
@@ -86,4 +83,66 @@ a{
 .navItemSelected .down{
     background-color: #7CB4B3;
     border-radius: 0px 60px 0px 0px;
+}
+
+/*RIGHT*/
+.right{
+    background-color: #FFFFFF;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    gap: 3vw;
+}
+.enterInfo{
+    display: grid;
+    justify-items: center;    
+    gap: 2vw;
+    width: 22vw;
+}
+.enterInfo text{
+    text-align: center;
+    font-size: 1.6vw;
+    font-weight: 600;
+}
+.info{
+    display: grid;
+    justify-items: center; 
+    gap: 1vw;
+    width: 20vw;
+}
+.inputContainer{
+    display: inline-flex;
+    align-items: center;
+    justify-items: center;
+    padding: 1.5%;
+    width: 100%;
+    border-bottom: 2px solid #000000;    
+}
+.inputIcon{
+    width: 1.2vw;
+    height: 1.1vw;
+    border-radius: 50%;
+    background-color: #D9D9D9;
+}
+.inputContainer input{
+    width: 100%;
+    padding: 0;
+    padding-left: 3%;
+    border: none;
+    outline: 0;
+    font-size: 1vw;
+    background-color: transparent;
+}
+.inputContainer input::placeholder{
+    font-size: 0.6vw; 
+}
+.signInButton{
+    width: 7vw;
+    height: 3vw;
+    padding: 0;
+    border: none;
+    border-radius: 60px;
+    font-size: 0.8vw;
+    background-color: #D9D9D9;
+    margin-left: 125%;
 }

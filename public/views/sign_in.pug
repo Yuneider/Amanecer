@@ -2,7 +2,34 @@ extends templates/indexTemp.pug
 
 block main
     .right 
-        .logo AMANECER
-        input(type="text")
-        input(type="password")
-        input(type="button", value="SIGN IN")
+        .enterInfo
+            text INFORMACIÓN PERSONAL
+            .info
+                .inputContainer
+                    .inputIcon
+                    input(type="text",autocomplete="off",placeholder="NOMBRE")
+                .inputContainer
+                    .inputIcon
+                    input(type="text",autocomplete="off",placeholder="CELULAR")
+                .inputContainer
+                    .inputIcon
+                    input(type="email",autocomplete="off",placeholder="CORREO",)
+                .inputContainer
+                    .inputIcon
+                    input(type="text",autocomplete="off",placeholder="ROL")
+        .enterInfo
+            text INFORMACIÓN DEL SISTEMA
+            .info
+                .inputContainer
+                    .inputIcon
+                    input(type="text",autocomplete="off",placeholder="USUARIO")
+                .inputContainer
+                    .inputIcon
+                    input(type="text",autocomplete="off",placeholder="CONTRASEÑA")
+                .inputContainer
+                    .inputIcon
+                    input(type="text",autocomplete="off",placeholder="PILAR")
+                .inputContainer
+                    .inputIcon
+                    input(type="text",autocomplete="off",placeholder="CODIGO")
+        input(type="button",value="SIGN IN", class="signInButton")
