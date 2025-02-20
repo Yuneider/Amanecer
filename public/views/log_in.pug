@@ -1,8 +1,15 @@
 extends templates/indexTemp.pug
 
 block main
-    .right 
-        .logo AMANECER
-        input(type="text")
-        input(type="password")
-        input(type="button", value="LOG IN")
+    .right
+        div(class="enterInfo logInContainer")
+            img(src="../assets/img/Logo.jpeg")
+            div(class="info logInInfo")
+                .inputContainer
+                    .inputIcon 
+                    input(type="text",placeholder="USUARIO")
+                .inputContainer
+                    .inputIcon
+                    input(type="password",placeholder="CONTRASEÑA")
+        a(href="/sign_in",class="indexButton") 
+            text LOG IN

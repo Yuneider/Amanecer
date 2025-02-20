@@ -1,4 +1,10 @@
+:root{
+    --backgroundColor: #F7F7F7;
+    --secondBackgroundColor: #7CB4B3;
+    --inputColor: #D9D9D9;
+}
 html{
+    background-color: var(--backgroundColor);
     height: 100%;
     font-family: "Inter";
 }
@@ -14,7 +20,7 @@ a{
 
 /*LEFT*/
 .left{
-    background-color: #7CB4B3;
+    background-color: var(--secondBackgroundColor);
     display: flex;
     justify-content: right;
     align-items: flex-start;
@@ -24,7 +30,7 @@ a{
     margin-top: 15vh;
     height: 30vh;
     width: 8vw;
-    background-color: #FFFFFF;
+    background-color: var(--backgroundColor);
 }
 
 /*NavItem*/
@@ -33,11 +39,11 @@ a{
     grid-template-rows: 0.6fr 1fr 0.6fr;
 }
 .up{
-    background-color: #7CB4B3;
+    background-color: var(--secondBackgroundColor);
     border-radius: 0px 0px 0px 0px;
 }
 .backColor{
-    background-color: #7CB4B3;
+    background-color: var(--secondBackgroundColor);
     display: grid;
 }
 .navText{
@@ -47,11 +53,11 @@ a{
     font-size: 1.3vw;
     font-weight: 720;
     border-radius: 0px 0px 0px 0px;
-    background-color: #7CB4B3;
-    color: #FFFFFF;
+    background-color: var(--secondBackgroundColor#F7F7F7);
+    color: var(--backgroundColor);
 }
 .down{
-    background-color: #7CB4B3;
+    background-color: var(--secondBackgroundColor);
     border-radius: 0px 0px 0px 0px;
 }
 
@@ -61,12 +67,12 @@ a{
     grid-template-rows: 0.6fr 1fr 0.6fr;
 }
 .navItemSelected .up{
-    background-color: #7CB4B3;
+    background-color: var(--secondBackgroundColor);
     border-radius: 0px 0px 60px 0px;
 }
 
 .navItemSelected .backColor{
-    background-color: #7CB4B3;
+    background-color: var(--secondBackgroundColor);
     display: grid;
 }
 
@@ -76,18 +82,18 @@ a{
     text-align: center;
     font-size: 1.3vw;
     border-radius: 60px 0px 0px 60px;
-    background-color: #FFFFFF;
+    background-color: var(--backgroundColor);
     color: #000000;
 }
 
 .navItemSelected .down{
-    background-color: #7CB4B3;
+    background-color: var(--secondBackgroundColor);
     border-radius: 0px 60px 0px 0px;
 }
 
 /*RIGHT*/
 .right{
-    background-color: #FFFFFF;
+    background-color: var(--backgroundColor);
     display: grid;
     align-content: center;
     justify-content: center;
@@ -99,6 +105,9 @@ a{
     gap: 2vw;
     width: 22vw;
 }
+.logInContainer{
+    gap: 4vw;
+}
 .enterInfo text{
     text-align: center;
     font-size: 1.6vw;
@@ -109,6 +118,9 @@ a{
     justify-items: center; 
     gap: 1vw;
     width: 20vw;
+}
+.logInInfo{
+    gap: 2vw;
 }
 .inputContainer{
     display: inline-flex;
@@ -122,7 +134,7 @@ a{
     width: 1.2vw;
     height: 1.1vw;
     border-radius: 50%;
-    background-color: #D9D9D9;
+    background-color: var(--inputColor);
 }
 .inputContainer input{
     width: 100%;
@@ -136,13 +148,23 @@ a{
 .inputContainer input::placeholder{
     font-size: 0.6vw; 
 }
-.signInButton{
+.indexButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 7vw;
     height: 3vw;
     padding: 0;
     border: none;
     border-radius: 60px;
     font-size: 0.8vw;
-    background-color: #D9D9D9;
+    background-color: var(--inputColor);
     margin-left: 125%;
+}
+.indexButton text{
+    color: #000000;
+}
+img{
+    width: 20vw;
+    height: auto;
 }
