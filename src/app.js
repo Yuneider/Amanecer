@@ -1,3 +1,5 @@
+//*TO START SERVER => npm start
+
 const express = require('express')
 const app = express()
 const path = require('path')
