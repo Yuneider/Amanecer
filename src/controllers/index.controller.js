@@ -13,4 +13,8 @@ controller.sign_in = (req,res)=>{
     res.render('sign_in',{navItemSelected})
 }
 
+controller.landginPage = (req,res)=>{
+    res.render('landginPage')
+}
+
 module.exports = controller
