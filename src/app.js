@@ -7,13 +7,13 @@ const { Dir } = require('fs')
 
 //SERVER FUNCTIONS
 app.set('view engine','pug')
-app.set('views',path.join(__dirname,'../public/views'))
+app.set('views',path.join(__dirname,'/public/views'))
 
 //STATIC FILES
-app.use(express.static(path.join(__dirname,'../public')))
+app.use(express.static(path.join(__dirname,'/public')))
 
 //ROUTERS
-app.use(require('../routers/index.router'))
+app.use(require('./routes/index.router'))
 
 //LISTENING
 app.listen(3000,()=>{
