@@ -4,13 +4,13 @@ const path = require('path')
 let navItemSelected
 
 controller.index = (req,res)=>{
-    navItemSelected = 'log_in'
-    res.render('log_in',{navItemSelected})
+    navItemSelected = 'login'
+    res.render('login',{navItemSelected})
 }
 
 controller.sign_in = (req,res)=>{
-    navItemSelected = 'sign_in'
-    res.render('sign_in',{navItemSelected})
+    navItemSelected = 'signin'
+    res.render('signin',{navItemSelected})
 }
 
 controller.landginPage = (req,res)=>{
