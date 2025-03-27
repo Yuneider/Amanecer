@@ -1,9 +1,12 @@
 //*TO START SERVER => npm start
 
-const express = require('express')
-const app = express()
-const path = require('path')
-const { Dir } = require('fs')
+require('dotenv').config();
+
+const express = require('express');
+const app = express();
+const path = require('path');
+const { Dir } = require('fs');
+const PORT = process.env.PORT;
 
 //SERVER FUNCTIONS
 app.set('view engine','pug')
@@ -16,6 +19,6 @@ app.use(express.static(path.join(__dirname,'/public')))
 app.use(require('./routes/index.router'))
 
 //LISTENING
-app.listen(3000,()=>{
-    console.log('SERVER LISTENING')
+app.listen(PORT,()=>{
+    console.log(`SERVER LISTENING ON PORT ${PORT}`)
 })
