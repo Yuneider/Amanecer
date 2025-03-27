@@ -11,6 +11,6 @@ app.set('views',path.join(__dirname,'/public/views'))
 app.use(express.static(path.join(__dirname,'/public')))
 
 //ROUTERS
-app.use(require('./routes/index.router'))
+app.use(require('./routes/authRoutes'))
 
 module.exports = app;

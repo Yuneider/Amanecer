@@ -1,14 +1,14 @@
 .left 
     .navContainer  
-        div(class=(navItemSelected=='log_in')?'navItemSelected':'navItem')
+        div(class=(navItemSelected=='login')?'navItemSelected':'navItem')
             .up
             .backColor
-                a.navText(href='/') 
+                a.navText(href='/login') 
                     text LOG IN
             .down
-        div(class=(navItemSelected=='sign_in')?'navItemSelected':'navItem')
+        div(class=(navItemSelected=='signin')?'navItemSelected':'navItem')
             .up
             .backColor
-                a.navText(href='/sign_in') 
+                a.navText(href='/signin') 
                     text SIGN IN
             .down
