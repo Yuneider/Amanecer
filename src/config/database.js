@@ -1,23 +1,28 @@
-var mysql = require('mysql');
+require('dotenv').config();
 
-var conexion = mysql.createConnection({
-    host: 'localhost',
-    database: 'test',
-    user: 'root',
-    password: ''
+const { Sequelize } = require('sequelize');
+
+const HOST = process.env.HOST;
+const DATABASE = process.env.DATABASE;
+const USER = process.env.USER;
+const PASSWORD = process.env.PASSWORD;
+
+// CREATE CONECCTION
+const sequelize = new Sequelize(DATABASE, USER, PASSWORD, {
+    host: HOST,
+    dialect: 'mysql',
+    logging: false // DISABLE LOG IN SQL CONSOLE
 });
 
-conexion.connect(function(error){
-    if(error){
-        throw error;
-    }else{
-        console.log('CONEXION EXITOSA');
+// TEST CONENECTION 
+const connectDB = async () => {
+    try {
+        await sequelize.authenticate();
+        console.log('CONNECTED TO DB.');
+    } catch (error) {
+        console.error('ERROR CONNECTION TO DB:', error);
+        process.exit(1);
     }
-});
+};
 
-conexion.query('SELECT * FROM user', function (error, results, fields) {
-    if (error) throw error;
-    console.log('sql: ', results[0].username);
-});
-
-conexion.end();
+module.exports = { sequelize, connectDB };
