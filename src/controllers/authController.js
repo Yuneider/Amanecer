@@ -13,6 +13,7 @@ controller.sign_in = (req,res)=>{
     res.render('signin',{navItemSelected})
 }
 
+//TODO: CREATE NEW SomethingController.js
 controller.landginPage = (req,res)=>{
     res.render('landginPage')
 }
