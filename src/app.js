@@ -15,5 +15,6 @@ app.use(express.static(path.join(__dirname,'/public')))
 
 //ROUTERS
 app.use(require('./routes/authRoutes'))
+app.use(require('./routes/landingRoutes'))
 
 module.exports = app;
