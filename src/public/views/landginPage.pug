@@ -1,7 +1,15 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="../css/landing.css")
+        link(rel="stylesheet" href="https://fonts.google.com/specimen/Inter")
+        title AMANECER
+        
 -const users = [{'name':'Yuneider','sex':'Hombre','age':'23','mentor':'Raquel Osorio','contributionType':'Libertad Condicional','membershipDate':'27/03/2025'},{'name':'Jainer','sex':'Hombre','age':'19','mentor':'Raquel Osorio','contributionType':'Libertad Condicional','membershipDate':'27/03/2025'},{'name':'Valentina','sex':'Mujer','age':'19','mentor':'Raquel Osorio','contributionType':'Libertad Condicional','membershipDate':'27/03/2025'},{'name':'Paula','sex':'Mujer','age':'20','mentor':'Raquel Osorio','contributionType':'Libertad Condicional','membershipDate':'27/03/2025'}]
 
 ol
     each user in users
         li= user.name
             li= user.age
-        
