@@ -20,7 +20,10 @@ if [ -f "package.json" ]; then
 
     #Installing dependencies
     echo "📦 Installing dependencies from package.json..." 
-    npm install
+    sudo npm install
+
+    #Installing nodemon with Permission
+    sudo npm install -g nodemon
 
     #Creating env file
     if [ -f ".env.example" ] && [ ! -f ".env" ]; then
