@@ -11,7 +11,7 @@ const PASSWORD = process.env.PASSWORD;
 const sequelize = new Sequelize(DATABASE, USER, PASSWORD, {
     host: HOST,
     dialect: 'mysql',
-    logging: false // DISABLE LOG IN SQL CONSOLE
+    logging: true // DISABLE LOG IN SQL CONSOLE
 });
 
 // TEST CONENECTION 
