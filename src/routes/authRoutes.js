@@ -1,8 +1,11 @@
 const express = require('express')
 const router = express.Router()
+const controller = require('../controllers/pageControllers/indexController')
 
-router.get('/login',require('../controllers/pageControllers/indexController').index)
+router.get('/login', controller.index)
 
-router.get('/signin',require('../controllers/pageControllers/indexController').sign_in)
+router.post('/checkUser', controller.checkUser)
+
+router.get('/signin', controller.sign_in)
 
 module.exports = router

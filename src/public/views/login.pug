@@ -1,15 +1,14 @@
 extends templates/indexTemp.pug
 
 block main
-    .right
+    form.right(action="/checkUser",method="post")
         div(class="enterInfo logInContainer")
             img(src="../assets/img/Logo.jpeg")
             div(class="info logInInfo")
                 .inputContainer
                     .inputIcon 
-                    input(type="text",placeholder="USUARIO")
+                    input(type="text",placeholder="USUARIO",name="username",required)
                 .inputContainer
                     .inputIcon
-                    input(type="password",placeholder="CONTRASEÑA")
-        a(href="/landingPage",class="indexButton") 
-            text LOG IN
+                    input(type="password",placeholder="CONTRASEÑA",name="password",required)
+        input(type="submit",class="indexButton",value="LOG IN")

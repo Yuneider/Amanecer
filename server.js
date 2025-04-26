@@ -1,19 +1,19 @@
 //*TO START SERVER => npm start
 
-require('dotenv').config();
+require('dotenv').config()
 
-const app = require('./src/app');
-const { connectDB, sequelize } = require('./src/config/database');
+const app = require('./src/app')
+const { connectDB, sequelize } = require('./src/config/database')
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT
 
-connectDB();
+connectDB()
 
 sequelize.sync().then(() => {
-    console.log('DB SYNCHRONIZED.');
+    console.log('DB SYNCHRONIZED.')
 }).catch(error => {
-    console.error('ERROR SYCHRONIZING DB:', error);
-});
+    console.error('ERROR SYCHRONIZING DB:', error)
+})
 
 //LISTENING
 app.listen(PORT, () => {
