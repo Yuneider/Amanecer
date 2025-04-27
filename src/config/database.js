@@ -11,16 +11,16 @@ const PASSWORD = process.env.PASSWORD;
 const sequelize = new Sequelize(DATABASE, USER, PASSWORD, {
     host: HOST,
     dialect: 'mysql',
-    logging: true // DISABLE LOG IN SQL CONSOLE
+    logging: false // DISABLE LOG IN SQL CONSOLE
 });
 
 // TEST CONENECTION 
 const connectDB = async () => {
     try {
         await sequelize.authenticate();
-        console.log('CONNECTED TO DB.');
+        console.log('✅ Connected to DB.');
     } catch (error) {
-        console.error('ERROR CONNECTION TO DB:', error);
+        console.error('❌ Error connecting to DB:', error);
         process.exit(1);
     }
 };

@@ -5,20 +5,17 @@ userController.getUsers = async () => {
     try {
         return await User.findAll()
     } catch (error) {
-        throw new Error('ERROR GETTING USERS: ' + error.message)
+        throw new Error('❌ Error getting users: ' + error.message)
     }
 }
 
-userController.checkUser = async (req, res) => {
-    const { username, password } = req.body
-    console.log(`Logging user: ${username}`)
-
-    const userLogin = await User.findOne({ username: username });
-
+userController.checkUser = async (username, password) => {
+    console.log('⚠️  Logging user: ' + username)
+    const userLogin = await User.findOne({ where: { username: username } });
     if (userLogin && userLogin.password === password) {
-        res.send('Login correcto')
+        return true
     } else {
-        res.send('Datos incorrectos')
+        return false
     }
 
 }

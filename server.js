@@ -10,12 +10,12 @@ const PORT = process.env.PORT
 connectDB()
 
 sequelize.sync().then(() => {
-    console.log('DB SYNCHRONIZED.')
+    console.log('✅ DB sychronized.')
 }).catch(error => {
-    console.error('ERROR SYCHRONIZING DB:', error)
+    console.error('❌Error sychronizing DB: ', error)
 })
 
 //LISTENING
 app.listen(PORT, () => {
-    console.log(`SERVER LISTENING ON PORT ${PORT}`)
+    console.log('✅ Server listening on port ' + PORT)
 })

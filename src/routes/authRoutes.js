@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const controller = require('../controllers/pageControllers/indexController')
+const authController = require('../controllers/pageControllers/authController')
 
-router.get('/login', controller.index)
+router.get('/login', authController.index)
 
-router.post('/checkUser', controller.checkUser)
+router.post('/checkUser', authController.checkUser)
 
-router.get('/signin', controller.sign_in)
+router.get('/signin', authController.sign_in)
 
 module.exports = router

@@ -10,12 +10,12 @@ controller.getUsers = async (req, res) => {
     try {
         const users = await userController.getUsers()
         if (users.length == 0) {
-            res.send('NO USERS FOUND')
+            res.send('❌ No users found')
         } else {
             res.json(users)
         }
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: error.message })
     }
 }
 
