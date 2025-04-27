@@ -10,4 +10,6 @@ router.get('/signin', authController.signin)
 
 router.post('/checkSignin', authController.checkSignin)
 
+router.get('/getDirectory', authController.getDirectory)
+
 module.exports = router
