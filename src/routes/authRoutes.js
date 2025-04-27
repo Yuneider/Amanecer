@@ -6,6 +6,8 @@ router.get('/login', authController.index)
 
 router.post('/checkUser', authController.checkUser)
 
-router.get('/signin', authController.sign_in)
+router.get('/signin', authController.signin)
+
+router.post('/checkSignin', authController.checkSignin)
 
 module.exports = router

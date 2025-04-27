@@ -9,7 +9,7 @@ controller.index = (req, res) => {
     res.render('login', { navItemSelected })
 }
 
-controller.sign_in = (req, res) => {
+controller.signin = (req, res) => {
     navItemSelected = 'signin'
     res.render('signin', { navItemSelected })
 }
@@ -27,6 +27,10 @@ controller.checkUser = async (req, res) => {
     } catch (error) {
         res.status(500).send(error.message)
     }
+}
+
+controller.checkSignin = (req, res) => {
+    res.send('checkSignin')
 }
 
 module.exports = controller

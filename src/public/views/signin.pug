@@ -1,19 +1,19 @@
 extends templates/indexTemp.pug
 
 block main
-    .right 
+    form.right(action="/checkSignin",method="post") 
         .enterInfo
             text INFORMACIÓN PERSONAL
             .info
                 .inputContainer
                     .inputIcon
-                    input(type="text",autocomplete="off",placeholder="NOMBRE")
+                    input(type="text",autocomplete="off",placeholder="NOMBRE",name="name",required)
                 .inputContainer
                     .inputIcon
                     input(type="text",autocomplete="off",placeholder="CELULAR")
                 .inputContainer
                     .inputIcon
-                    input(type="email",autocomplete="off",placeholder="CORREO",)
+                    input(type="email",autocomplete="off",placeholder="CORREO")
                 .inputContainer
                     .inputIcon
                     input(type="text",autocomplete="off",placeholder="ROL")
@@ -32,5 +32,4 @@ block main
                 .inputContainer
                     .inputIcon
                     input(type="text",autocomplete="off",placeholder="CODIGO")
-        a(href="/login",class="indexButton") 
-            text SIGN IN
+        input(type="submit",class="indexButton",value="SIGN IN") 
