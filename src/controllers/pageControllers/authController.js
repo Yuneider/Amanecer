@@ -32,7 +32,9 @@ controller.checkUser = async (req, res) => {
 
 controller.checkSignin = (req, res) => {
     try {
-        res.send('checkSignin')
+
+        navItemSelected = 'login'
+        res.render('login', { navItemSelected })
     } catch (error) {
         res.status(500).send(error.message)
     }
