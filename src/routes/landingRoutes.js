@@ -4,6 +4,4 @@ const landingController = require('../controllers/pageControllers/landingControl
 
 router.get('/landingPage', landingController.landginPage)
 
-router.get('/getUsers', landingController.getUsers)
-
 module.exports = router

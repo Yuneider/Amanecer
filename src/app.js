@@ -7,14 +7,15 @@ const { Dir } = require('fs');
 app.use(express.urlencoded({ extended: true }));
 
 //SERVER FUNCTIONS
-app.set('view engine','pug')
-app.set('views',path.join(__dirname,'/public/views'))
+app.set('view engine', 'pug')
+app.set('views', path.join(__dirname, '/public/views'))
 
 //STATIC FILES
-app.use(express.static(path.join(__dirname,'/public')))
+app.use(express.static(path.join(__dirname, '/public')))
 
 //ROUTERS
 app.use(require('./routes/authRoutes'))
 app.use(require('./routes/landingRoutes'))
+app.use(require('./routes/getRoutes'))
 
 module.exports = app;
