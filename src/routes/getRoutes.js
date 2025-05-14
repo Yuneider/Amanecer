@@ -8,4 +8,6 @@ router.get('/getUsers', getController.getUsers)
 
 router.get('/getParameters', getController.getParameters)
 
+router.get('/getRoles', getController.getRoles)
+
 module.exports = router

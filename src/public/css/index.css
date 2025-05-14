@@ -1,17 +1,20 @@
-:root{
+:root {
     --backgroundColor: #F7F7F7;
     --secondBackgroundColor: #7CB4B3;
     --inputColor: #D9D9D9;
 }
-html{
+
+html {
     background-color: var(--backgroundColor);
     height: 100%;
     font-family: "Inter";
 }
-a{
+
+a {
     text-decoration: none;
 }
-.bodyContainer{
+
+.bodyContainer {
     display: grid;
     margin: 0;
     height: 100%;
@@ -19,13 +22,14 @@ a{
 }
 
 /*LEFT*/
-.left{
+.left {
     background-color: var(--secondBackgroundColor);
     display: flex;
     justify-content: right;
     align-items: flex-start;
 }
-.navContainer{
+
+.navContainer {
     display: grid;
     margin-top: 15vh;
     height: 30vh;
@@ -34,19 +38,22 @@ a{
 }
 
 /*NavItem*/
-.navItem{
+.navItem {
     display: grid;
     grid-template-rows: 0.6fr 1fr 0.6fr;
 }
-.up{
+
+.up {
     background-color: var(--secondBackgroundColor);
     border-radius: 0px 0px 0px 0px;
 }
-.backColor{
+
+.backColor {
     background-color: var(--secondBackgroundColor);
     display: grid;
 }
-.navText{
+
+.navText {
     display: grid;
     place-content: center;
     text-align: center;
@@ -56,27 +63,29 @@ a{
     background-color: var(--secondBackgroundColor#F7F7F7);
     color: var(--backgroundColor);
 }
-.down{
+
+.down {
     background-color: var(--secondBackgroundColor);
     border-radius: 0px 0px 0px 0px;
 }
 
 /*NavItemSelected*/
-.navItemSelected{
+.navItemSelected {
     display: grid;
     grid-template-rows: 0.6fr 1fr 0.6fr;
 }
-.navItemSelected .up{
+
+.navItemSelected .up {
     background-color: var(--secondBackgroundColor);
     border-radius: 0px 0px 60px 0px;
 }
 
-.navItemSelected .backColor{
+.navItemSelected .backColor {
     background-color: var(--secondBackgroundColor);
     display: grid;
 }
 
-.navItemSelected .navText{
+.navItemSelected .navText {
     display: grid;
     place-content: center;
     text-align: center;
@@ -86,69 +95,84 @@ a{
     color: #000000;
 }
 
-.navItemSelected .down{
+.navItemSelected .down {
     background-color: var(--secondBackgroundColor);
     border-radius: 0px 60px 0px 0px;
 }
 
 /*RIGHT*/
-.right{
+.right {
     background-color: var(--backgroundColor);
     display: grid;
     align-content: center;
     justify-content: center;
     gap: 3vw;
 }
-.enterInfo{
+
+.enterInfo {
     display: grid;
-    justify-items: center;    
-    gap: 2vw;
-    width: 22vw;
+    justify-items: center;
+    gap: 2.3vw;
+    width: 30vw;
 }
-.logInContainer{
+
+.logInContainer {
     gap: 4vw;
 }
-.enterInfo text{
+
+.enterInfo text {
     text-align: center;
-    font-size: 1.6vw;
-    font-weight: 600;
+    font-size: 2vw;
+    font-weight: 800;
 }
-.info{
+
+.info {
     display: grid;
-    justify-items: center; 
+    justify-items: center;
     gap: 1vw;
     width: 20vw;
 }
-.logInInfo{
+
+.logInInfo {
     gap: 2vw;
 }
-.inputContainer{
+
+.buttonContainer {
+    display: inline-flex;
+}
+
+.inputContainer {
     display: inline-flex;
     align-items: center;
     justify-items: center;
     padding: 1.5%;
     width: 100%;
-    border-bottom: 2px solid #000000;    
+    border-bottom: 2px solid #000000;
 }
-.inputIcon{
+
+.inputIcon {
     width: 1.2vw;
     height: 1.1vw;
     border-radius: 50%;
     background-color: var(--inputColor);
 }
-.inputContainer input{
+
+.inputContainer input {
     width: 100%;
     padding: 0;
     padding-left: 3%;
     border: none;
     outline: 0;
     font-size: 1vw;
+    font-weight: 700;
     background-color: transparent;
 }
-.inputContainer input::placeholder{
-    font-size: 0.6vw; 
+
+.inputContainer input::placeholder {
+    font-size: 0.8vw;
 }
-.indexButton{
+
+.indexButton {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -159,12 +183,13 @@ a{
     border-radius: 60px;
     font-size: 0.8vw;
     background-color: var(--inputColor);
-    margin-left: 125%;
 }
-.indexButton text{
+
+.indexButton text {
     color: #000000;
 }
-img{
+
+img {
     width: 20vw;
     height: auto;
 }

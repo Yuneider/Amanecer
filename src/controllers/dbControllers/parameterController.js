@@ -1,9 +1,9 @@
-const Parameter = require('../../models/parameterModel')
+const parameter = require('../../models/parameterModel')
 const parameterController = {}
 
 parameterController.getParameters = async () => {
     try {
-        return await Parameter.findAll()
+        return await parameter.findAll()
     } catch (error) {
         throw new Error('❌ Error getting parameters: ' + error.message)
     }

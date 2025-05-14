@@ -30,7 +30,14 @@ controller.checkUser = async (req, res) => {
 
 controller.checkSignin = (req, res) => {
     try {
-        //*ENVIAR CODIGO DE VERIFICACION A MI CORREO
+        const {
+            id, idType,
+            name, phone,
+            email, role,
+            username, password,
+            pillar, verificationCode
+        } = req.body
+        //VALIDAR SI EL CÓDIGO INGRESADO CONCUERDA CON EL CÓDIGO UBICADO EN LA TABLA DE PARAMETROS
         navItemSelected = 'login'
         res.render('login', { navItemSelected })
     } catch (error) {

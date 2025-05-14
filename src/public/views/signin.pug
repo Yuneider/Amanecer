@@ -7,6 +7,12 @@ block main
             .info
                 .inputContainer
                     .inputIcon
+                    input(type="text",autocomplete="off",placeholder="TIPO DOCUMENTO",name="idType",required)
+                .inputContainer
+                    .inputIcon
+                    input(type="text",autocomplete="off",placeholder="CEDULA",name="id",required)
+                .inputContainer
+                    .inputIcon
                     input(type="text",autocomplete="off",placeholder="NOMBRE",name="name",required)
                 .inputContainer
                     .inputIcon
@@ -32,4 +38,6 @@ block main
                 .inputContainer
                     .inputIcon
                     input(type="text",autocomplete="off",placeholder="CODIGO",name="verificationCode",required)
-        input(type="submit",class="indexButton",value="SIGN IN") 
+            .buttonContainer        
+                input(class="indexButton",value="GENERAR CÓDIGO")
+                input(type="submit",class="indexButton",value="SIGN IN") 

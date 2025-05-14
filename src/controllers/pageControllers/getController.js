@@ -2,6 +2,7 @@ const controller = {}
 const userController = require('../dbControllers/userController')
 const directoryController = require('../dbControllers/directoryController')
 const parameterController = require('../dbControllers/parameterController')
+const roleController = require('../dbControllers/roleController')
 
 controller.getDirectory = async (req, res) => {
     try {
@@ -36,6 +37,19 @@ controller.getParameters = async (req, res) => {
             res.send('❌ No parameters found')
         } else {
             res.json(parameters)
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}
+
+controller.getRoles = async (req, res) => {
+    try {
+        const roles = await roleController.getRoles()
+        if (roles.length == 0) {
+            res.send('❌ No roles found')
+        } else {
+            res.json(roles)
         }
     } catch (error) {
         res.status(500).json({ error: error.message })
