@@ -1,6 +1,9 @@
 const controller = {}
 const userController = require('../dbControllers/userController')
+const pamatereController = require('../dbControllers/parameterController')
+const mailer = require('../util/mailer')
 
+const crypto = require('crypto')
 let navItemSelected
 
 controller.index = (req, res) => {
@@ -28,6 +31,22 @@ controller.checkUser = async (req, res) => {
     }
 }
 
+controller.generateSecurityCode = async (req, res) => {
+    try {
+        // SECURITY CODE GENERATED AND UPDATED
+        pamatereController.updateParameter(1, crypto.randomBytes(4).toString('hex'))
+        // EMAIL PARAMETERS 
+        //TODO: OBTENER PARAMETROS DE LA BASE DE DATOS
+        const to = 'yparada22@gmail.com'
+        const subject = 'Prueba'
+        const body = 'Esto es una prueba'
+        mailer.sendMail(to, subject, body)
+        res.json('✅ Parameter updated')
+    } catch (error) {
+        res.status(500).send(error.message)
+    }
+}
+
 controller.checkSignin = (req, res) => {
     try {
         const {
@@ -37,7 +56,7 @@ controller.checkSignin = (req, res) => {
             username, password,
             pillar, verificationCode
         } = req.body
-        //VALIDAR SI EL CÓDIGO INGRESADO CONCUERDA CON EL CÓDIGO UBICADO EN LA TABLA DE PARAMETROS
+        //TODO: VALIDAR SI EL CÓDIGO INGRESADO CONCUERDA CON EL CÓDIGO UBICADO EN LA TABLA DE PARAMETROS
         navItemSelected = 'login'
         res.render('login', { navItemSelected })
     } catch (error) {

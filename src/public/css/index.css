@@ -32,7 +32,7 @@ a {
 .navContainer {
     display: grid;
     margin-top: 15vh;
-    height: 30vh;
+    height: 32vh;
     width: 8vw;
     background-color: var(--backgroundColor);
 }
@@ -192,4 +192,15 @@ a {
 img {
     width: 20vw;
     height: auto;
+}
+
+.selectionBox {
+    width: 100%;
+    padding-left: 3%;
+    appearance: none;
+    border: none;
+    background-color: var(--backgroundColor);
+    font-size: 0.8vw;
+    font-weight: 700;
+    color: #757575;
 }

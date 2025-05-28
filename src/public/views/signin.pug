@@ -1,13 +1,20 @@
 extends templates/indexTemp.pug
 
 block main
+    script(src="../js/auth.js") 
     form.right(action="/checkSignin",method="post") 
         .enterInfo
             text INFORMACIÓN PERSONAL
             .info
                 .inputContainer
                     .inputIcon
-                    input(type="text",autocomplete="off",placeholder="TIPO DOCUMENTO",name="idType",required)
+                    select(class="selectionBox",name="idType",id="idType", required)
+                        option(label="TIPO DOCUMENTO")  
+                        hr
+                        option(value="TI",label="TARJETA DE IDENTIDAD")
+                        option(value="CC",label="CÉDULA DE CIUDADANIA")
+                        option(value="TE",label="TARJETA DE EXTRANJERÍA")
+                        option(value="CE",label="CÉDULA DE EXTRANJERÍA")
                 .inputContainer
                     .inputIcon
                     input(type="text",autocomplete="off",placeholder="CEDULA",name="id",required)
@@ -20,9 +27,6 @@ block main
                 .inputContainer
                     .inputIcon
                     input(type="email",autocomplete="off",placeholder="CORREO",name="email",required)
-                .inputContainer
-                    .inputIcon
-                    input(type="text",autocomplete="off",placeholder="ROL",name="role",required)
         .enterInfo
             text INFORMACIÓN DEL SISTEMA
             .info
@@ -34,10 +38,15 @@ block main
                     input(type="text",autocomplete="off",placeholder="CONTRASEÑA",name="password",required)
                 .inputContainer
                     .inputIcon
-                    input(type="text",autocomplete="off",placeholder="PILAR",name="pillar",required)
+                    select(class="selectionBox",name="pillar",id="pillar", required)
+                        option(label="PILAR")  
+                        option(value="Crecer",label="CRECER")
+                        option(value="Sanar",label="SANAR")
+                        option(value="Construir",label="CONSTRUIR")
+                        option(value="Mentor",label="MENTOR")
                 .inputContainer
                     .inputIcon
                     input(type="text",autocomplete="off",placeholder="CODIGO",name="verificationCode",required)
-            .buttonContainer        
-                input(class="indexButton",value="GENERAR CÓDIGO")
+            .buttonContainer
+                input(onclick="generateSecurityCode()" ,class="indexButton",value="GENERAR CÓDIGO")        
                 input(type="submit",class="indexButton",value="SIGN IN") 
