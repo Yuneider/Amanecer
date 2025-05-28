@@ -34,14 +34,14 @@ controller.checkUser = async (req, res) => {
 controller.generateSecurityCode = async (req, res) => {
     try {
         // SECURITY CODE GENERATED AND UPDATED
-        pamatereController.updateParameter(1, crypto.randomBytes(4).toString('hex'))
-        // EMAIL PARAMETERS 
-        //TODO: OBTENER PARAMETROS DE LA BASE DE DATOS
-        const to = 'yparada22@gmail.com'
-        const subject = 'Prueba'
-        const body = 'Esto es una prueba'
-        mailer.sendMail(to, subject, body)
-        res.json('✅ Parameter updated')
+        pamatereController.updateParameter(100, crypto.randomBytes(4).toString('hex'))
+        // EMAIL PARAMETERS BETWEEN 100 AND 103 
+        const securityCode = await pamatereController.getParameter(100)
+        const to = await pamatereController.getParameter(101)
+        const subject = await pamatereController.getParameter(102)
+        const body = await pamatereController.getParameter(103)
+        mailer.sendMail(to.get('value'), subject.get('value'), body.get('value') + securityCode.get('value'))
+        res.json('✅ Procedure ended')
     } catch (error) {
         res.status(500).send(error.message)
     }
