@@ -47,7 +47,7 @@ controller.generateSecurityCode = async (req, res) => {
     }
 }
 
-controller.checkSignin = (req, res) => {
+controller.checkSignin = async (req, res) => {
     try {
         const {
             id, idType,
@@ -56,9 +56,14 @@ controller.checkSignin = (req, res) => {
             username, password,
             pillar, verificationCode
         } = req.body
-        //TODO: VALIDAR SI EL CÓDIGO INGRESADO CONCUERDA CON EL CÓDIGO UBICADO EN LA TABLA DE PARAMETROS
-        navItemSelected = 'login'
-        res.render('login', { navItemSelected })
+        const securityCode = await pamatereController.getParameter(100)
+        if (verificationCode.localeCompare(securityCode.get('value')) === 0) {
+            navItemSelected = 'login'
+            res.render('login', { navItemSelected })
+        } else {
+            //TODO: PENDIENTE DESARROLLAR SISTEMA DE ALERTAS SIN REDIRECCIÓN A NUEVA RUTA /
+            res.status(500).send('IMPOSIBLE INGRESAR')
+        }
     } catch (error) {
         res.status(500).send(error.message)
     }
