@@ -1,7 +1,6 @@
 extends templates/indexTemp.pug
 
-block main
-    script(src="../js/auth.js") 
+block main 
     form.right(action="/checkSignin",method="post") 
         .enterInfo
             text INFORMACIÓN PERSONAL
@@ -23,7 +22,7 @@ block main
                     input(type="text",autocomplete="off",placeholder="NOMBRE",name="name",required)
                 .inputContainer
                     .inputIcon
-                    input(type="text",autocomplete="off",placeholder="CELULAR",name="phone",required)
+                    input(type="number",autocomplete="off",placeholder="CELULAR",name="phone")
                 .inputContainer
                     .inputIcon
                     input(type="email",autocomplete="off",placeholder="CORREO",name="email",required)
@@ -35,7 +34,7 @@ block main
                     input(type="text",autocomplete="off",placeholder="USUARIO",name="username",required)
                 .inputContainer
                     .inputIcon
-                    input(type="text",autocomplete="off",placeholder="CONTRASEÑA",name="password",required)
+                    input(type="password",autocomplete="off",placeholder="CONTRASEÑA",name="password",required)
                 .inputContainer
                     .inputIcon
                     select(class="selectionBox",name="pillar",id="pillar", required)
@@ -46,7 +45,5 @@ block main
                         option(value="Mentor",label="MENTOR")
                 .inputContainer
                     .inputIcon
-                    input(type="text",autocomplete="off",placeholder="CODIGO",name="verificationCode",required)
-            .buttonContainer
-                input(onclick="generateSecurityCode()" ,class="indexButton",value="GENERAR CÓDIGO")        
-                input(type="submit",class="indexButton",value="SIGN IN") 
+                    input(type="text",autocomplete="off",placeholder="CODIGO",name="verificationCode",required)        
+            input(type="submit",class="indexButton",value="SIGN IN") 

@@ -10,6 +10,4 @@ router.get('/signin', authController.signin)
 
 router.post('/checkSignin', authController.checkSignin)
 
-router.post('/generateSecurityCode', authController.generateSecurityCode)
-
 module.exports = router

@@ -25,7 +25,7 @@ const Directory = sequelize.define('Directory', {
         allowNull: false,
     },
     phone: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: true,
     },
     email: {

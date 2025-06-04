@@ -137,10 +137,6 @@ a {
     gap: 2vw;
 }
 
-.buttonContainer {
-    display: inline-flex;
-}
-
 .inputContainer {
     display: inline-flex;
     align-items: center;
@@ -183,6 +179,7 @@ a {
     border-radius: 60px;
     font-size: 0.8vw;
     background-color: var(--inputColor);
+    margin-left: 125%;
 }
 
 .indexButton text {

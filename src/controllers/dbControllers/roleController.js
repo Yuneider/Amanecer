@@ -1,9 +1,9 @@
-const role = require('../../models/roleModel')
+const roleModel = require('../../models/roleModel')
 const roleController = {}
 
 roleController.getRoles = async () => {
     try {
-        return await role.findAll()
+        return await roleModel.findAll()
     } catch (error) {
         throw new Error('❌ Error getting roles: ' + error.message)
     }
