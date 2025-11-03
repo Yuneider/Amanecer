@@ -1,6 +1,10 @@
 extends templates/indexTemp.pug
 
 block main
+    if alert
+        .alert(class=(alert.type ? 'alert-' + alert.type : 'alert-info') + ' alert--fixed')
+            != alert.msg
+            button.close(type="button", onclick="this.parentElement.remove()") ×
     form.right(action="/checkUser",method="post")
         div(class="enterInfo logInContainer")
             img(src="../assets/img/Logo.jpeg")

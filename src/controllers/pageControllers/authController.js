@@ -6,6 +6,7 @@ const mailer = require('../util/mailer')
 const crypto = require('crypto')
 const directoryController = require('../dbControllers/directoryController')
 let navItemSelected
+let alert
 
 controller.index = (req, res) => {
     navItemSelected = 'login'
@@ -30,7 +31,12 @@ controller.checkUser = async (req, res) => {
         if (validUser) {
             res.render('landginPage')
         } else {
-            res.status(500).send('❌ User not valid')
+            navItemSelected = 'login'
+            alert = {
+                type: 'danger',
+                msg: 'Usuario o contraseña incorrectos'
+            }
+            res.render('login', { navItemSelected, alert });
         }
     } catch (error) {
         res.status(500).send(error.message)
