@@ -2,7 +2,6 @@ const controller = {}
 const userController = require('../dbControllers/userController')
 const pamatereController = require('../dbControllers/parameterController')
 const mailer = require('../util/mailer')
-
 const crypto = require('crypto')
 const directoryController = require('../dbControllers/directoryController')
 let navItemSelected
