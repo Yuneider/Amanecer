@@ -1,84 +1,202 @@
-const controller = {}
-const userController = require('../dbControllers/userController')
-const pamatereController = require('../dbControllers/parameterController')
-const mailer = require('../util/mailer')
-const crypto = require('crypto')
-const directoryController = require('../dbControllers/directoryController')
-let navItemSelected
-let alert
+/**
+ * @file authController.js
+ * @description Controlador de autenticación (login/signin)
+ * 
+ * Maneja:
+ * - Páginas de login/signin
+ * - Verificación de credenciales
+ * - Generación de códigos de seguridad
+ * - Creación de nuevos usuarios
+ */
 
+const userController = require('../dbControllers/userController');
+const parameterController = require('../dbControllers/parameterController');
+const directoryController = require('../dbControllers/directoryController');
+const mailer = require('../util/mailer');
+const logger = require('../../middleware/logger');
+const { validateLoginInput, validateRegistrationInput } = require('../../validators/userValidator');
+const { SECURITY_CONFIG, VIEW_NAMES, ALERT_TYPES, ERROR_MESSAGES } = require('../../constants/appConstants');
+const crypto = require('crypto');
+
+const controller = {};
+
+/**
+ * Renderiza la página de login
+ * @param {Object} req - Objeto request
+ * @param {Object} res - Objeto response
+ */
 controller.index = (req, res) => {
-    navItemSelected = 'login'
-    res.render('login', { navItemSelected })
-}
+    const navItemSelected = VIEW_NAMES.LOGIN;
+    logger.info('Acceso a página de login');
+    res.render(VIEW_NAMES.LOGIN, { navItemSelected });
+};
 
+/**
+ * Renderiza la página de signin (registro)
+ * @param {Object} req - Objeto request
+ * @param {Object} res - Objeto response
+ * @async
+ */
 controller.signin = async (req, res) => {
     try {
-        generateSecurityCode()
-        navItemSelected = 'signin'
-        res.render('signin', { navItemSelected })
+        await generateSecurityCode();
+        const navItemSelected = VIEW_NAMES.SIGNIN;
+        logger.info('Acceso a página de signin');
+        res.render(VIEW_NAMES.SIGNIN, { navItemSelected });
     } catch (error) {
-        res.status(500).send(error.message)
+        logger.error('Error en página de signin', error.message);
+        res.status(500).json({ success: false, error: error.message });
     }
-}
+};
 
+/**
+ * Verifica las credenciales del usuario
+ * @param {Object} req - Objeto request con datos POST
+ * @param {string} req.body.username - Nombre de usuario
+ * @param {string} req.body.password - Contraseña
+ * @param {Object} res - Objeto response
+ * @async
+ */
 controller.checkUser = async (req, res) => {
     try {
-        const user = req.body
-        const validUser = await userController.checkUser(user)
-        console.log('❓ validUser: ' + validUser)
+        const user = req.body;
+        
+        // Validar datos de entrada
+        const validation = validateLoginInput(user);
+        if (!validation.isValid) {
+            logger.warn('Datos de login inválidos', validation.errors);
+            return res.status(400).render(VIEW_NAMES.LOGIN, {
+                navItemSelected: VIEW_NAMES.LOGIN,
+                alert: {
+                    type: ALERT_TYPES.DANGER,
+                    msg: validation.errors[0]
+                }
+            });
+        }
+        
+        // Verificar usuario
+        logger.info(`Verificando usuario: ${user.username}`);
+        const validUser = await userController.checkUser(user);
+        
         if (validUser) {
-            res.render('landginPage')
+            logger.success(`✅ Login exitoso para: ${user.username}`);
+            res.render(VIEW_NAMES.LANDING, { navItemSelected: VIEW_NAMES.LANDING });
         } else {
-            navItemSelected = 'login'
-            alert = {
-                type: 'danger',
-                msg: 'Usuario o contraseña incorrectos'
-            }
-            res.render('login', { navItemSelected, alert });
+            logger.warn(`Intento de login fallido para: ${user.username}`);
+            res.render(VIEW_NAMES.LOGIN, {
+                navItemSelected: VIEW_NAMES.LOGIN,
+                alert: {
+                    type: ALERT_TYPES.DANGER,
+                    msg: ERROR_MESSAGES.INVALID_CREDENTIALS
+                }
+            });
         }
     } catch (error) {
-        res.status(500).send(error.message)
+        logger.error('Error verificando usuario', error.message);
+        res.status(500).json({ success: false, error: ERROR_MESSAGES.INTERNAL_ERROR });
     }
-}
+};
 
-generateSecurityCode = async () => {
+/**
+ * Genera un código de seguridad y lo envía por correo
+ * @returns {Promise<void>}
+ * @throws {Error} Si hay error en la generación o envío del código
+ * @private
+ */
+const generateSecurityCode = async () => {
     try {
-        // SECURITY CODE GENERATED AND UPDATED
-        const securityCode = crypto.randomBytes(4).toString('hex')
-        // EMAIL PARAMETERS BETWEEN 100 AND 103
-        await pamatereController.updateParameter(100, securityCode)
-        const to = await pamatereController.getParameter(101)
-        const subject = await pamatereController.getParameter(102)
-        const body = await pamatereController.getParameter(103)
-        mailer.sendMail(to.value, subject.value, body.value + securityCode)
+        // Generar código de 4 caracteres hexadecimales
+        const securityCode = crypto
+            .randomBytes(SECURITY_CONFIG.SECURITY_CODE_LENGTH)
+            .toString('hex');
+        
+        // Guardar código en parámetros de BD
+        const paramId = SECURITY_CONFIG.PARAMETER_EMAIL_RANGE.MIN;
+        await parameterController.updateParameter(paramId, securityCode);
+        
+        // Obtener datos de correo
+        const toParam = await parameterController.getParameter(101);
+        const subjectParam = await parameterController.getParameter(102);
+        const bodyParam = await parameterController.getParameter(103);
+        
+        // Enviar correo con código
+        const to = toParam.value;
+        const subject = subjectParam.value;
+        const body = bodyParam.value + securityCode;
+        
+        await mailer.sendMail(to, subject, body);
+        logger.success('✅ Código de seguridad enviado por correo');
     } catch (error) {
-        throw new Error('❌ Error generating security code ' + error.message)
+        logger.error('Error generando código de seguridad', error.message);
+        throw new Error('Error generando código de seguridad: ' + error.message);
     }
-}
+};
 
+/**
+ * Verifica el registro de un nuevo usuario
+ * @param {Object} req - Objeto request con datos POST
+ * @param {string} req.body.username - Nombre de usuario
+ * @param {string} req.body.password - Contraseña
+ * @param {string} req.body.pillar - Pilar del usuario
+ * @param {string} req.body.verificationCode - Código de verificación
+ * @param {Object} res - Objeto response
+ * @async
+ */
 controller.checkSignin = async (req, res) => {
-    const user = req.body
-    user.id_role = 1
     try {
-        const securityCode = await pamatereController.getParameter(100)
-        if (!user.verificationCode.localeCompare(securityCode.value) === 0) {
-            throw new Error('❌ Wrong security code')
+        const user = req.body;
+        user.id_role = SECURITY_CONFIG.DEFAULT_USER_ROLE;
+        
+        // Validar datos de entrada
+        const validation = validateRegistrationInput(user);
+        if (!validation.isValid) {
+            logger.warn('Datos de registro inválidos', validation.errors);
+            return res.status(400).render(VIEW_NAMES.SIGNIN, {
+                navItemSelected: VIEW_NAMES.SIGNIN,
+                alert: {
+                    type: ALERT_TYPES.DANGER,
+                    msg: validation.errors[0]
+                }
+            });
         }
+        
+        // Verificar código de seguridad
+        logger.info(`Verificando registro de usuario: ${user.username}`);
+        const securityCodeParam = await parameterController.getParameter(101);
+        
+        if (user.verificationCode !== securityCodeParam.value) {
+            logger.warn('Código de seguridad inválido');
+            throw new Error(ERROR_MESSAGES.INVALID_SECURITY_CODE);
+        }
+        
+        // Verificar que el usuario no exista
         if (await userController.getUser(user.username)) {
-            throw new Error('❌ User already registered')
+            logger.warn(`Usuario ya existe: ${user.username}`);
+            throw new Error(ERROR_MESSAGES.USER_ALREADY_EXISTS);
         }
+        
+        // Verificar que el directorio no exista
         if (await directoryController.getDirectory(user.id)) {
-            throw new Error('❌ Directory already registered')
+            logger.warn(`Directorio ya existe para: ${user.id}`);
+            throw new Error(ERROR_MESSAGES.DIRECTORY_EXISTS);
         }
-        await userController.insertUser(user)
-        await directoryController.insertDirectory(user)
-        navItemSelected = 'login'
-        res.render('login', { navItemSelected })
+        
+        // Crear usuario y directorio
+        await userController.insertUser(user);
+        await directoryController.insertDirectory(user);
+        
+        logger.success(`✅ Nuevo usuario registrado: ${user.username}`);
+        res.render(VIEW_NAMES.LOGIN, { navItemSelected: VIEW_NAMES.LOGIN });
     } catch (error) {
-        //TODO: SISTEMA PARA MOSTRAR ERRORES / ALERTAS
-        res.status(500).send(error.message)
+        logger.error('Error en registro de usuario', error.message);
+        res.status(500).render(VIEW_NAMES.SIGNIN, {
+            navItemSelected: VIEW_NAMES.SIGNIN,
+            alert: {
+                type: ALERT_TYPES.DANGER,
+                msg: error.message || ERROR_MESSAGES.INTERNAL_ERROR
+            }
+        });
     }
-}
+};
 
-module.exports = controller
+module.exports = controller;
